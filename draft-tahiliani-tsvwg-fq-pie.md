@@ -3,7 +3,7 @@ title: "Flow Queue PIE: A Hybrid Packet Scheduler and Active Queue Management Al
 abbrev: "FQ-PIE"
 category: exp
 
-docname: draft-tahiliani-tsvwg-fq-pie-latest
+docname: draft-ietf-tsvwg-fq-pie-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
@@ -20,8 +20,8 @@ venue:
   type: "Working Group"
   mail: "tsvwg@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/tsvwg/"
-  github: "mohittahiliani/draft-tahiliani-tsvwg-fq-pie"
-  latest: "https://mohittahiliani.github.io/draft-tahiliani-tsvwg-fq-pie/draft-tahiliani-tsvwg-fq-pie.html"
+  github: "mohittahiliani/draft-ietf-tsvwg-fq-pie"
+  latest: "https://mohittahiliani.github.io/draft-ietf-tsvwg-fq-pie/draft-ietf-tsvwg-fq-pie.html"
 
 author:
  -
