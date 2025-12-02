@@ -2,16 +2,16 @@
 
 This is the working area for the individual Internet-Draft, "Flow Queue PIE: A Hybrid Packet Scheduler and Active Queue Management Algorithm".
 
-* [Editor's Copy](https://mohittahiliani.github.io/draft-tahiliani-tsvwg-fq-pie/#go.draft-tahiliani-tsvwg-fq-pie.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-tahiliani-tsvwg-fq-pie)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-tahiliani-tsvwg-fq-pie)
-* [Compare Editor's Copy to Individual Draft](https://mohittahiliani.github.io/draft-tahiliani-tsvwg-fq-pie/#go.draft-tahiliani-tsvwg-fq-pie.diff)
+* [Editor's Copy](https://mohittahiliani.github.io/draft-ietf-tsvwg-fq-pie/#go.draft-ietf-tsvwg-fq-pie.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-tsvwg-fq-pie)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-tsvwg-fq-pie)
+* [Compare Editor's Copy to Individual Draft](https://mohittahiliani.github.io/draft-ietf-tsvwg-fq-pie/#go.draft-ietf-tsvwg-fq-pie.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/mohittahiliani/draft-tahiliani-tsvwg-fq-pie/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/mohittahiliani/draft-ietf-tsvwg-fq-pie/blob/main/CONTRIBUTING.md).
 
 Contributions can be made by creating pull requests.
 The GitHub interface supports creating pull requests using the Edit (✏) button.
