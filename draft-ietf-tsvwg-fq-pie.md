@@ -51,7 +51,7 @@ informative:
       2019 IEEE 44th LCN Symposium on Emerging Topics in Networking (LCN Symposium)
   FREEBSD-FQ-PIE:
     target: https://web.archive.org/web/20241018123533/http://caia.swin.edu.au/reports/160418A/CAIA-TR-160418A.pdf
-    title: 'Dummynet AQM v0. 2–CoDel, FQ-CoDel, PIE and FQ-PIE for FreeBSD’s ipfw/dummynet Framework'
+    title: 'Dummynet AQM v0. 2–CoDel, FQ-CoDel, PIE and FQ-PIE for FreeBSD's ipfw/dummynet Framework'
     author:
     - name: Rasool Al-Saadi
     - name: Grenville Armitage
@@ -107,13 +107,13 @@ The details of flow queuing and the PIE algorithm are not covered here; for more
 
 The packet enqueue process is described as follows: first, the incoming packets are classified into different queues by hashing the 5-tuple, which includes the protocol number, source and destination IP addresses, and source and destination port numbers, similar to the approach used in FQ-CoDel.
 
-Next, the packet is passed to the PIE algorithm, which uses a drop probability to determine whether the packet should be enqueued or dropped, as outlined in {{!RFC8033}}. This drop probability is updated periodically (every 15 ms, as per {{!RFC8033}}) based on the current queue delay’s deviation from the target delay and whether the delay is trending up or down.
+Next, the packet is passed to the PIE algorithm, which uses a drop probability to determine whether the packet should be enqueued or dropped, as outlined in {{!RFC8033}}. This drop probability is updated periodically (every 15 ms, as per {{!RFC8033}}) based on the current queue delay's deviation from the target delay and whether the delay is trending up or down.
 
-{{!RFC8033}} presents two methods for calculating the current queue delay: one uses Little’s Law, estimating delay based on the queue length and the average dequeue rate; the other takes direct measurements using timestamps, as implemented in CoDel and FQ-CoDel. However, experimental studies on the PIE algorithm [REVISIT-PIE] indicate that while the dequeue rate is intended to estimate the transmission rate of packets over the outgoing link, it may instead reflect the rate at which packets move from the host stack (e.g., Linux qdisc) to the device driver’s transmission ring. Additionally, in FQ-PIE, queue delay estimates from Little’s Law can be unreliable, as it’s challenging to calculate an accurate per-queue dequeue rate. Consequently, the FQ-PIE algorithm SHOULD calculate the current queue delay using direct measurements with timestamps.
+{{!RFC8033}} presents two methods for calculating the current queue delay: one uses Little's Law, estimating delay based on the queue length and the average dequeue rate; the other takes direct measurements using timestamps, as implemented in CoDel and FQ-CoDel. However, experimental studies on the PIE algorithm [REVISIT-PIE] indicate that while the dequeue rate is intended to estimate the transmission rate of packets over the outgoing link, it may instead reflect the rate at which packets move from the host stack (e.g., Linux qdisc) to the device driver's transmission ring. Additionally, in FQ-PIE, queue delay estimates from Little's Law can be unreliable, as it's challenging to calculate an accurate per-queue dequeue rate. Consequently, the FQ-PIE algorithm SHOULD calculate the current queue delay using direct measurements with timestamps.
 
 It is important to note that the timestamping approach provides a "per-packet queue delay," while the drop probability is calculated periodically (every 15 ms, as specified in {{!RFC8033}}). Therefore, the FQ-PIE algorithm MAY use the queue delay value from the most recently dequeued packet when calculating the drop probability.
 
-At the time of writing this document, the Linux, FreeBSD and ns-3 implementations use timestamps to calculate the current queue delay and consider the measurements from the most recently dequeued packet when calculating the drop probability. Additionally, these implementations offer an option to use the dequeue rate estimation technique based on Little’s Law.
+At the time of writing this document, the Linux, FreeBSD and ns-3 implementations use timestamps to calculate the current queue delay and consider the measurements from the most recently dequeued packet when calculating the drop probability. Additionally, these implementations offer an option to use the dequeue rate estimation technique based on Little's Law.
 
 Lastly, if an incoming packet arrives when the total number of enqueued packets has already saturated the queue capacity, FQ-PIE drops the packet without further processing. In contrast, FQ-CoDel identifies the queue with the largest current byte count (i.e., a "fat flow") when the queue capacity is saturated and drops half of the packets from this queue (up to a maximum of 64 packets, as specified in Section 4.1 of {{!RFC8290}}). FQ-PIE does not adopt this approach for the reasons explained below.
 
