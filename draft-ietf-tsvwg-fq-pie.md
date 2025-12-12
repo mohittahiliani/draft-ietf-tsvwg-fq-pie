@@ -51,7 +51,7 @@ informative:
       2019 IEEE 44th LCN Symposium on Emerging Topics in Networking (LCN Symposium)
   FREEBSD-FQ-PIE:
     target: https://web.archive.org/web/20241018123533/http://caia.swin.edu.au/reports/160418A/CAIA-TR-160418A.pdf
-    title: 'Dummynet AQM v0. 2–CoDel, FQ-CoDel, PIE and FQ-PIE for FreeBSD's ipfw/dummynet Framework'
+    title: 'Dummynet AQM v0. 2–CoDel, FQ-CoDel, PIE and FQ-PIE for FreeBSDs ipfw/dummynet Framework'
     author:
     - name: Rasool Al-Saadi
     - name: Grenville Armitage
