@@ -4,8 +4,8 @@
 
 Transport and Services Working Group                     M. P. Tahiliani
 Internet-Draft                National Institute of Technology Karnataka
-Intended status: Experimental                           12 December 2025
-Expires: 15 June 2026
+Intended status: Experimental                               2 March 2026
+Expires: 3 September 2026
 
 
  Flow Queue PIE: A Hybrid Packet Scheduler and Active Queue Management
@@ -55,11 +55,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 June 2026.
+   This Internet-Draft will expire on 3 September 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -136,11 +136,11 @@ Table of Contents
    queuing, which isolates competing flows by treating flows that build
    queues differently from those that do not, and (ii) the PIE AQM
    algorithm, which manages each queue and maintains a target queue
-   delay (recommended as 15 ms in [RFC8033]).  Flow queuing works by
-   classifying incoming packets into different queues during the enqueue
-   phase and then scheduling outgoing packets from these queues during
-   the dequeue phase.  The PIE algorithm, however, only operates during
-   enqueue.
+   delay (such as the 15 ms default in [RFC8033]).  Flow queuing works
+   by classifying incoming packets into different queues during the
+   enqueue phase and then scheduling outgoing packets from these queues
+   during the dequeue phase.  The PIE algorithm, however, only operates
+   during enqueue.
 
    The details of flow queuing and the PIE algorithm are not covered
    here; for more information, please refer to [RFC8290] and [RFC8033],
