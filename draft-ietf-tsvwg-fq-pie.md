@@ -16,7 +16,7 @@ keyword:
  - unicorn
  - sparkling distributed ledger
 venue:
-  group: "Transport and Services Working Group"
+  group: "Transport and Services"
   type: "Working Group"
   mail: "tsvwg@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/tsvwg/"
