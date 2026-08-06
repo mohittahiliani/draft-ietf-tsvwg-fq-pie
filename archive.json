@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-04T01:46:59.950566+00:00",
+  "timestamp": "2026-08-06T01:49:26.311640+00:00",
   "repo": "mohittahiliani/draft-ietf-tsvwg-fq-pie",
   "labels": [
     {
@@ -71,16 +71,24 @@
       "id": "I_kwDONL7jHs8AAAABJ4IWEw",
       "title": "Suggestions from Chris - November 4 (IETF 124)",
       "url": "https://github.com/mohittahiliani/draft-ietf-tsvwg-fq-pie/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "mohittahiliani",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Mailing list thread: https://mailarchive.ietf.org/arch/msg/tsvwg/yIbAhtV0hUVbMjrUPCV2R6Pd9CA/\n\nSection 4\nI would prefer that RFC8033 (PIE) did not say the latency target \"SHOULD be 15ms\", as the optimum queue size depends very much on the variability of the bottleneck bandwidth. Constant bandwidth can handle a shorter standing queue. Wireless links often require a longer queue unless they are to sacrifice a lot of throughput. So for this draft I'd prefer that we didn't reinforce the problem. Instead of \"(recommended as 15ms in RFC8033)\" we could say \"(such as the 15ms default in RFC8033)\".\n\nSection 4.1 Enqueue\nThis says \"It is important to note that the timestamping approach provides a \"per-packet queue delay,\" while the drop probability is calculated periodically (every 15 ms, as specified in [RFC8033]). Therefore, the FQ-PIE algorithm MAY use the queue delay value from the most recently dequeued packet when calculating the drop probability.\"\nThis feels like a big choice being offered to the implementer. Either we change the drop probability every packet, or we change it every 15ms. As all three current implementations take the per-packet approach, should we instead make this the default in the document? Are there some circumstances in which every 15ms is better? If yes, let's describe that. If not, get rid of it entirely.\n\n\"FQ-PIE does not adopt this approach for the reasons explained below.\"\nI think the document would be easier to read if we move the reasons paragraph to an appendix.\n\nSection 4.3 ECN Support\nAs L4S was published as RFC9330 nearly three years ago, any mention of ECN in this document shouldn't ignore its presence. These days ECT(1) does not generally imply classic 3168 marking.\n\nRFC9330 section 4.2b actually mentions FQ-PIE!\n\"Per-Flow Queues and AQMs: A scheduler with per-flow queues, such as FQ-CoDel or FQ-PIE, can be used for L4S. For instance, within each queue of an FQ-CoDel system, as well as a CoDel AQM, there is typically also the option of ECN marking at an immediate (unsmoothed) shallow threshold to support use in data centres (see Section 5.2.7 of the FQ-CoDel spec [RFC8290]). In Linux, this has been modified so that the shallow threshold can be solely applied to ECT(1) packets [FQ_CoDel_Thresh]. Then, if there is a flow of Not-ECT or ECT(0) packets in the per-flow queue, the Classic AQM (e.g., CoDel) is applied; whereas, if there is a flow of ECT(1) packets in the queue, the shallower (typically sub-millisecond) threshold is applied. In addition, ECT(0) and Not-ECT packets could potentially be classified into a separate flow queue from ECT(1) and CE packets to avoid them mixing if they share a common flow identifier (e.g., in a VPN).\"\n\nI think we should refer to the above, and add relevant commentary. I'm happy to write a PR to do this. We also have the interesting design choice about having separate FQs for ECT(1). The aforementioned VPNs are one reason to do this. The other (possibly more common) reason is for hash collisions.\n\nSection 5 Experiments\n\nIf we're going to list suggestions for experimentation, we could add:\n* Assessment of performance differences of handling mixed L4S/Classic traffic through FQ-PIE vs DualPI2.\n* Assessment of performance differences of FQ-PIE vs FQ-Codel, using and extending the hackathon work.",
       "createdAt": "2026-07-23T10:16:14Z",
-      "updatedAt": "2026-07-23T10:23:09Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-08-05T10:30:08Z",
+      "closedAt": "2026-08-05T10:30:08Z",
+      "comments": [
+        {
+          "author": "mohittahiliani",
+          "authorAssociation": "OWNER",
+          "body": "Fixed in 99f57d8 and 3eb5f0d",
+          "createdAt": "2026-08-05T10:30:08Z",
+          "updatedAt": "2026-08-05T10:30:08Z"
+        }
+      ]
     },
     {
       "number": 3,
