@@ -131,7 +131,7 @@ FQ-PIE MAY support ECN by marking ECN-Capable Transport (ECT) packets {{!RFC3168
 
 The design of the FQ-PIE algorithm as described in this document has been a part of the Linux kernel since version 5.6 (released on March 29, 2020), FreeBSD since version 11.0-RELEASE (released on October 10, 2016), and the ns-3 network simulator since version 3.34 (released on July 14, 2021). The following aspects can be explored for further study and experimentation:
 
-- The scenarios similar to those summarized in Figure 4 of {{!RFC7928}} MAY be considered for an in-depth experimentation of FQ-PIE.
+- The scenarios similar to those summarized in Figure 4 of {{!RFC7928}} may be considered for in-depth experimentation of FQ-PIE.
 
 - Interactions between flow queuing and new congestion control algorithms, such as Bottleneck Bandwidth and Round-trip propagation time (BBR) {{?I-D.draft-ietf-ccwg-bbr}}.
 
