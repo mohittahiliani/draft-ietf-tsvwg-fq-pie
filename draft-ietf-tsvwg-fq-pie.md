@@ -12,9 +12,9 @@ v: 3
 area: "Web and Internet Transport"
 workgroup: "Transport and Services Working Group"
 keyword:
- - next generation
- - unicorn
- - sparkling distributed ledger
+ - Bufferbloat
+ - Flow Queuing
+ - PIE
 venue:
   group: "Transport and Services"
   type: "Working Group"
