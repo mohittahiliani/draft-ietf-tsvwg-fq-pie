@@ -4,8 +4,8 @@
 
 Transport and Services Working Group                     M. P. Tahiliani
 Internet-Draft                National Institute of Technology Karnataka
-Intended status: Experimental                              5 August 2026
-Expires: 6 February 2027
+Intended status: Experimental                             22 August 2026
+Expires: 23 February 2027
 
 
  Flow Queue PIE: A Hybrid Packet Scheduler and Active Queue Management
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 February 2027.
+   This Internet-Draft will expire on 23 February 2027.
 
 Copyright Notice
 
@@ -157,9 +157,9 @@ Table of Contents
    Next, the packet is passed to the PIE algorithm, which uses a drop
    probability to determine whether the packet should be enqueued or
    dropped, as outlined in [RFC8033].  This drop probability is updated
-   periodically (every 15 ms, as per [RFC8033]) based on the current
-   queue delay's deviation from the target delay and whether the delay
-   is trending up or down.
+   periodically (such as the 15 ms default in [RFC8033]) based on the
+   current queue delay's deviation from the target delay and whether the
+   delay is trending up or down.
 
    [RFC8033] presents two methods for calculating the current queue
    delay: one uses Little's Law, estimating delay based on the queue
@@ -177,7 +177,7 @@ Table of Contents
 
    It is important to note that the timestamping approach provides a
    "per-packet queue delay," while the drop probability is calculated
-   periodically (every 15 ms, as specified in [RFC8033]).  Therefore, at
+   periodically (such as the 15 ms default in [RFC8033]).  Therefore, at
    each periodic probability update, FQ-PIE uses the queue delay value
    derived from the most recently dequeued packet.
 
