@@ -236,7 +236,7 @@ Table of Contents
    for further study and experimentation:
 
    *  The scenarios similar to those summarized in Figure 4 of [RFC7928]
-      MAY be considered for an in-depth experimentation of FQ-PIE.
+      may be considered for in-depth experimentation of FQ-PIE.
 
    *  Interactions between flow queuing and new congestion control
       algorithms, such as Bottleneck Bandwidth and Round-trip
