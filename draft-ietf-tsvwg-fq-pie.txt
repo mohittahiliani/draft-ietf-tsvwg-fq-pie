@@ -176,10 +176,10 @@ Table of Contents
    delay using direct measurements with timestamps.
 
    It is important to note that the timestamping approach provides a
-   "per-packet queue delay," while the drop probability is calculated
-   periodically (such as the 15 ms default in [RFC8033]).  Therefore, at
-   each periodic probability update, FQ-PIE uses the queue delay value
-   derived from the most recently dequeued packet.
+   per-packet queue delay, while the drop probability is calculated
+   periodically.  Therefore, at each periodic probability update, FQ-PIE
+   uses the queue delay value derived from the most recently dequeued
+   packet.
 
    At the time of writing this document, the Linux, FreeBSD and ns-3
    implementations use timestamps to calculate the current queue delay
