@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-20T00:44:22.687807+00:00",
+  "timestamp": "2026-08-23T00:50:06.027632+00:00",
   "repo": "mohittahiliani/draft-ietf-tsvwg-fq-pie",
   "labels": [
     {
@@ -95,16 +95,24 @@
       "id": "I_kwDONL7jHs8AAAABJ4J4MA",
       "title": "Suggestions from Chris - July 22 (IETF 126)",
       "url": "https://github.com/mohittahiliani/draft-ietf-tsvwg-fq-pie/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "mohittahiliani",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Mailing list thread: https://mailarchive.ietf.org/arch/msg/tsvwg/eLoQszjTN7hzSLV81Jui_nbYFHc/\n\nI've re-read the draft. In section 4 I'm happy with the new wording \"maintains a target queue delay (such as the 15 ms default in [RFC8033])\" . This conveys that people are empowered to choose a different target if they want. If I recall correctly, in your recent testing you achieved good performance with a 5ms target. Obviously variability of the bottleneck bandwidth is a major factor in choosing the target, but we don't necessarily need to go into that here.\n\nA bit later down in section 4.1 we have a similar issue of a default being conveyed as set in stone:\n\"This drop probability is updated periodically (every 15 ms, as per [RFC8033])\"\n\nRFC8033 actually says \"The update interval, T_UPDATE, is defaulted to be 15 milliseconds.\"\n\nSo I suggest we correct that.\n\nOnce done, there is some duplication lower down:\n'It is important to note that the timestamping approach provides a \"per-packet queue delay,\" while the drop probability is calculated periodically (every 15 ms, as specified in [RFC8033]).'\nIf you simply delete the part in brackets, then the above sentence is good in my eyes.\n\nI would like to propose new wording for section 4.3, ECN Support. It currently says:\n\n\"FQ-PIE MAY support ECN by marking ECN-Capable Transport (ECT) packets [RFC3168] instead of dropping them, in accordance with the recommendations in Section 5.1 of [RFC8033]. The Linux, FreeBSD and ns-3 implementations of FQ-PIE comply with these recommendations at the time of writing this document.\"\n\nI suggest replacing it with:\n\n\"FQ-PIE MAY support classic ECN [RFC3168] by marking ECT(0) packets as CE instead of dropping them, in accordance with the recommendations in Section 5.1 of [RFC8033]. The Linux, FreeBSD and ns-3 implementations of FQ-PIE comply with these recommendations at the time of writing this document.\n\nA future implementation of FQ-PIE MAY support L4S [RFC9330] but such a design is not described by this document.\"",
       "createdAt": "2026-07-23T10:19:35Z",
-      "updatedAt": "2026-07-23T10:24:06Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-08-22T04:10:56Z",
+      "closedAt": "2026-08-22T04:10:56Z",
+      "comments": [
+        {
+          "author": "mohittahiliani",
+          "authorAssociation": "OWNER",
+          "body": "Fixed in 05c3758 and c414f0f",
+          "createdAt": "2026-08-22T04:10:56Z",
+          "updatedAt": "2026-08-22T04:10:56Z"
+        }
+      ]
     }
   ],
   "pulls": []
