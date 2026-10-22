@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-20T02:48:28.062429+00:00",
+  "timestamp": "2026-10-22T02:40:39.698604+00:00",
   "repo": "mohittahiliani/draft-ietf-tsvwg-fq-pie",
   "labels": [
     {
@@ -115,5 +115,32 @@
       ]
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 4,
+      "id": "PR_kwDONL7jHs8AAAABJhBPIA",
+      "title": "Minor rewording suggestions",
+      "url": "https://github.com/mohittahiliani/draft-ietf-tsvwg-fq-pie/pull/4",
+      "state": "OPEN",
+      "author": "Kevsy",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "One very minor suggestion (colon instead of full stop), and one suggestion to clarify wording around the use of buckets vs. flow queuing. \n\nMany thanks for the draft!",
+      "createdAt": "2026-10-20T09:09:30Z",
+      "updatedAt": "2026-10-20T09:09:30Z",
+      "baseRepository": "mohittahiliani/draft-ietf-tsvwg-fq-pie",
+      "baseRefName": "main",
+      "baseRefOid": "69d781e4ba9acc7e6733bbc6d1536a13976cf59c",
+      "headRepository": "Kevsy/draft-ietf-tsvwg-fq-pie",
+      "headRefName": "main",
+      "headRefOid": "8c764c93801af22eb4e25c5862b5514e10e937dc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
