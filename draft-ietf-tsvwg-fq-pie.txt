@@ -4,8 +4,8 @@
 
 Transport and Services Working Group                     M. P. Tahiliani
 Internet-Draft                National Institute of Technology Karnataka
-Intended status: Experimental                            14 October 2026
-Expires: 17 April 2027
+Intended status: Experimental                            31 October 2026
+Expires: 4 May 2027
 
 
  Flow Queue PIE: A Hybrid Packet Scheduler and Active Queue Management
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 April 2027.
+   This Internet-Draft will expire on 4 May 2027.
 
 Copyright Notice
 
@@ -318,7 +318,7 @@ Table of Contents
               FQ-CoDel, PIE and FQ-PIE for FreeBSDs ipfw/dummynet
               Framework", Centre for Advanced Internet Architectures,
               Swinburne University of Technology, Melbourne, Australia,
-              Tech. Rep. A, 160418 , October 2016,
+              Tech. Rep. A, 160418 , April 2016,
               <https://web.archive.org/web/20241018123533/
               http://caia.swin.edu.au/reports/160418A/CAIA-TR-
               160418A.pdf>.
