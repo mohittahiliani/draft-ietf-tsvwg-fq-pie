@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-01T03:33:25.373075+00:00",
+  "timestamp": "2026-11-03T04:45:28.973675+00:00",
   "repo": "mohittahiliani/draft-ietf-tsvwg-fq-pie",
   "labels": [
     {
@@ -152,7 +152,7 @@
       "labels": [],
       "body": "This PR includes two commits:\r\n\r\nhttps://github.com/mohittahiliani/draft-ietf-tsvwg-fq-pie/pull/4/changes/8c764c93801af22eb4e25c5862b5514e10e937dc : Rephrasing of how the bucket approach differs\r\n\r\nAt least in plain language (I'm not a subject matter expert here)  this sentence appears confusing:\r\n\r\n\"While the goal of flow queuing is to assign a unique queue to each flow, flows can instead be hashed into a set of buckets using a hash function, where each bucket corresponds to its own queue.\"\r\n\r\n\"each bucket corresponds to its own queue.\" appears to meet the goal \"to assign a unique queue to each flow\". But the use of 'while' and 'instead' implies that the use of buckets corresponding to their own queues is at odds with the goal. So suggesting this rephrasing, *if my understanding is correct*\r\n\r\nAlternatively, if the nuance is that the bucket corresponds to its own queue, but is decoupled from the queue in a way that 'regular' flow queuing is not, then that should be the stress of the sentence.\r\n\r\nhttps://github.com/mohittahiliani/draft-ietf-tsvwg-fq-pie/pull/4/changes/7d7e907e26b11f793c3834f288554f332fa137b3 Minor grammar nit\r\n\r\nI believe the colon better indicates that the explanation follows immediately below - otherwise the reader may not be sure at which later point the explanation is given.\r\n\r\nMany thanks for the draft!",
       "createdAt": "2026-10-20T09:09:30Z",
-      "updatedAt": "2026-10-31T11:17:15Z",
+      "updatedAt": "2026-11-02T14:47:28Z",
       "baseRepository": "mohittahiliani/draft-ietf-tsvwg-fq-pie",
       "baseRefName": "main",
       "baseRefOid": "69d781e4ba9acc7e6733bbc6d1536a13976cf59c",
@@ -190,6 +190,26 @@
               "body": "Thanks for initiating this!\n\nThe flow queuing has following points:\n\n- The intention is to give each flow its own queue.\n- Hashing is an approximation of this ideal.\n\nDo you think this statement would make it more clear \"While the goal of flow queuing is to assign a unique queue to each flow, a hashing-based scheme is used in practice, where flows are hashed into a set of buckets, each of which has its own queue.\"",
               "createdAt": "2026-10-31T11:17:15Z",
               "updatedAt": "2026-10-31T11:17:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONL7jHs8AAAABVggWNw",
+          "commit": {
+            "abbreviatedOid": "8c764c9"
+          },
+          "author": "Kevsy",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-02T14:47:28Z",
+          "updatedAt": "2026-11-02T14:47:28Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Thanks @mohittahiliani - yes, I think your wording above makes it more clear \ud83d\udc4d ",
+              "createdAt": "2026-11-02T14:47:28Z",
+              "updatedAt": "2026-11-02T14:47:28Z"
             }
           ]
         }
