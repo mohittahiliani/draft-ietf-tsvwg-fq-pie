@@ -356,6 +356,8 @@ Acknowledgments
    document.  The author also thanks the developers and contributors of
    the FQ-PIE implementations in Linux, FreeBSD, and ns-3.  Vishal
    Kamath and Arun Kumar R contributed to the FQ-PIE experiments.
+   Rasool Al-Saadi and Grenville Armitage developed the FreeBSD FQ-PIE
+   implementation.
 
 Author's Address
 
