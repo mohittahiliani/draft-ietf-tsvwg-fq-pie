@@ -4,8 +4,8 @@
 
 Transport and Services Working Group                     M. P. Tahiliani
 Internet-Draft                National Institute of Technology Karnataka
-Intended status: Experimental                            31 October 2026
-Expires: 4 May 2027
+Intended status: Experimental                            4 November 2026
+Expires: 8 May 2027
 
 
  Flow Queue PIE: A Hybrid Packet Scheduler and Active Queue Management
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 May 2027.
+   This Internet-Draft will expire on 8 May 2027.
 
 Copyright Notice
 
@@ -101,9 +101,9 @@ Table of Contents
 
    When a packet is enqueued, it is classified into different queues to
    ensure isolation between flows.  While the goal of flow queuing is to
-   assign a unique queue to each flow, flows can instead be hashed into
-   a set of buckets using a hash function, where each bucket corresponds
-   to its own queue.  The PIE AQM operates independently on each of
+   assign a unique queue to each flow, a hashing-based scheme is used in
+   practice, where flows are hashed into a set of buckets, each of which
+   has its own queue.  The PIE AQM operates independently on each of
    these queues, enabling each flow to receive appropriate congestion
    signals either implicitly (via packet drops) or explicitly (via
    mechanisms such as Explicit Congestion Notification (ECN) [RFC3168]).
@@ -196,7 +196,7 @@ Table of Contents
    "fat flow") when the queue capacity is saturated and drops half of
    the packets from this queue (up to a maximum of 64 packets, as
    specified in Section 4.1 of [RFC8290]).  FQ-PIE does not adopt this
-   approach for the reasons explained below.
+   approach for the reasons explained below:
 
    Since CoDel performs its queue control operations during the dequeue
    phase and does not drop incoming packets until the queue is full, it
@@ -326,9 +326,9 @@ Table of Contents
    [I-D.draft-ietf-ccwg-bbr]
               Cardwell, N., Swett, I., and J. Beshay, "BBR Congestion
               Control", Work in Progress, Internet-Draft, draft-ietf-
-              ccwg-bbr-06, 6 July 2026,
+              ccwg-bbr-07, 2 November 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ccwg-
-              bbr-06>.
+              bbr-07>.
 
    [LINUX-FQ-PIE]
               Ramakrishnan, G., Bhasi, M., Saicharan, V., Monis, L.,

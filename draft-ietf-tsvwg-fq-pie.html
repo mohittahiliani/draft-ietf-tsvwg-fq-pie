@@ -9,25 +9,25 @@
 <meta content="
        This document presents Flow Queue Proportional Integral controller Enhanced (FQ-PIE), a hybrid packet scheduler and Active Queue Management (AQM) algorithm to isolate flows and tackle the problem of bufferbloat. FQ-PIE uses hashing to classify incoming packets into different queues and provide flow isolation. Packets are dequeued by using a variant of the round robin scheduler. Each such flow is managed by the PIE algorithm to maintain high link utilization while controlling the queue delay to a target value. 
     " name="description">
-<meta content="xml2rfc 3.34.1" name="generator">
+<meta content="xml2rfc 3.35.0" name="generator">
 <meta content="Bufferbloat" name="keyword">
 <meta content="Flow Queuing" name="keyword">
 <meta content="PIE" name="keyword">
 <meta content="draft-ietf-tsvwg-fq-pie-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.34.1
-    Python 3.14.8
-    ConfigArgParse 1.8.0
+  xml2rfc 3.35.0
+    Python 3.14.10
+    ConfigArgParse 1.9.0
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.13.4
+    platformdirs 4.14.3
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.9.2
+    wcwidth 0.9.4
 -->
 <link href="draft-ietf-tsvwg-fq-pie.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1043,11 +1043,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">FQ-PIE</td>
-<td class="right">October 2026</td>
+<td class="right">November 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tahiliani</td>
-<td class="center">Expires 4 May 2027</td>
+<td class="center">Expires 8 May 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1060,12 +1060,12 @@ svg {
 <dd class="internet-draft">draft-ietf-tsvwg-fq-pie-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-10-31" class="published">31 October 2026</time>
+<time datetime="2026-11-04" class="published">4 November 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Experimental</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-05-04">4 May 2027</time></dd>
+<dd class="expires"><time datetime="2027-05-08">8 May 2027</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1115,7 +1115,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1203,7 +1203,7 @@ svg {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">Flow Queue Proportional Integral Controller Enhanced (FQ-PIE) combines flow queuing with the PIE (Proportional Integral controller Enhanced) <span>[<a href="#RFC8033" class="cite xref">RFC8033</a>]</span> Active Queue Management (AQM) algorithm to provide flow isolation and reduce bufferbloat by controlling queue delay. This is similar to how Flow Queue Controlled Delay (FQ-CoDel) <span>[<a href="#RFC8290" class="cite xref">RFC8290</a>]</span> integrates flow queuing with the CoDel (Controlled Delay) AQM algorithm <span>[<a href="#RFC8289" class="cite xref">RFC8289</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">When a packet is enqueued, it is classified into different queues to ensure isolation between flows. While the goal of flow queuing is to assign a unique queue to each flow, flows can instead be hashed into a set of buckets using a hash function, where each bucket corresponds to its own queue. The PIE AQM operates independently on each of these queues, enabling each flow to receive appropriate congestion signals either implicitly (via packet drops) or explicitly (via mechanisms such as Explicit Congestion Notification (ECN) <span>[<a href="#RFC3168" class="cite xref">RFC3168</a>]</span>). For dequeuing, FQ-PIE employs the Deficit Round Robin (DRR) based scheduler described in <span>[<a href="#RFC8290" class="cite xref">RFC8290</a>]</span>, which ensures fair packet scheduling across the different queues.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-2">When a packet is enqueued, it is classified into different queues to ensure isolation between flows. While the goal of flow queuing is to assign a unique queue to each flow, a hashing-based scheme is used in practice, where flows are hashed into a set of buckets, each of which has its own queue. The PIE AQM operates independently on each of these queues, enabling each flow to receive appropriate congestion signals either implicitly (via packet drops) or explicitly (via mechanisms such as Explicit Congestion Notification (ECN) <span>[<a href="#RFC3168" class="cite xref">RFC3168</a>]</span>). For dequeuing, FQ-PIE employs the Deficit Round Robin (DRR) based scheduler described in <span>[<a href="#RFC8290" class="cite xref">RFC8290</a>]</span>, which ensures fair packet scheduling across the different queues.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">An implementation of FQ-PIE has been incorporated into the mainline Linux kernel as a queuing discipline (qdisc) <span>[<a href="#LINUX-FQ-PIE" class="cite xref">LINUX-FQ-PIE</a>]</span> and is supported by several Linux distributions. Another implementation has also been incorporated into FreeBSD <span>[<a href="#FREEBSD-FQ-PIE" class="cite xref">FREEBSD-FQ-PIE</a>]</span>. Finally, an implementation of FQ-PIE is also available in the ns-3 network simulator <span>[<a href="#ns-3-FQ-PIE" class="cite xref">ns-3-FQ-PIE</a>]</span>.<a href="#section-1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1243,7 +1243,7 @@ appear in all capitals, as shown here.<a href="#section-3-1" class="pilcrow">¶<
 <p id="section-4.1-3"><span>[<a href="#RFC8033" class="cite xref">RFC8033</a>]</span> presents two methods for calculating the current queue delay: one uses Little's Law, estimating delay based on the queue length and the average dequeue rate; the other takes direct measurements using timestamps, as implemented in CoDel and FQ-CoDel. However, experimental studies on the PIE algorithm <span>[<a href="#REVISIT-PIE" class="cite xref">REVISIT-PIE</a>]</span> indicate that while the dequeue rate is intended to estimate the transmission rate of packets over the outgoing link, it may instead reflect the rate at which packets move from the host stack (e.g., Linux qdisc) to the device driver's transmission ring. Additionally, in FQ-PIE, queue delay estimates from Little's Law can be unreliable, as it's challenging to calculate an accurate per-queue dequeue rate. Consequently, the FQ-PIE algorithm <span class="bcp14">SHOULD</span> calculate the current queue delay using direct measurements with timestamps.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.1-4">It is important to note that the timestamping approach provides a per-packet queue delay, while the drop probability is calculated periodically. Therefore, at each periodic probability update, FQ-PIE uses the queue delay value derived from the most recently dequeued packet.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
 <p id="section-4.1-5">At the time of writing this document, the Linux, FreeBSD and ns-3 implementations use timestamps to calculate the current queue delay and consider the measurements from the most recently dequeued packet when calculating the drop probability. Additionally, these implementations offer an option to use the dequeue rate estimation technique based on Little's Law.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
-<p id="section-4.1-6">Lastly, if an incoming packet arrives when the total number of enqueued packets has already saturated the queue capacity, FQ-PIE drops the packet without further processing. In contrast, FQ-CoDel identifies the queue with the largest current byte count (i.e., a "fat flow") when the queue capacity is saturated and drops half of the packets from this queue (up to a maximum of 64 packets, as specified in Section 4.1 of <span>[<a href="#RFC8290" class="cite xref">RFC8290</a>]</span>). FQ-PIE does not adopt this approach for the reasons explained below.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
+<p id="section-4.1-6">Lastly, if an incoming packet arrives when the total number of enqueued packets has already saturated the queue capacity, FQ-PIE drops the packet without further processing. In contrast, FQ-CoDel identifies the queue with the largest current byte count (i.e., a "fat flow") when the queue capacity is saturated and drops half of the packets from this queue (up to a maximum of 64 packets, as specified in Section 4.1 of <span>[<a href="#RFC8290" class="cite xref">RFC8290</a>]</span>). FQ-PIE does not adopt this approach for the reasons explained below:<a href="#section-4.1-6" class="pilcrow">¶</a></p>
 <p id="section-4.1-7">Since CoDel performs its queue control operations during the dequeue phase and does not drop incoming packets until the queue is full, it tends to fill its queues more quickly than PIE, which drops packets randomly during the enqueue phase. This is especially true when CoDel has just entered the dropping phase, as it takes time to ramp up its packet dropping frequency. Therefore, the strategy of dropping half of the packets from a fat flow's queue suits FQ-CoDel but is not appropriate for FQ-PIE. Dropping packets in bulk might lead to underutilization of link capacity, as FQ-PIE already enforces queue control during the enqueue phase.<a href="#section-4.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1363,7 +1363,7 @@ appear in all capitals, as shown here.<a href="#section-3-1" class="pilcrow">¶<
 <dd class="break"></dd>
 <dt id="I-D.draft-ietf-ccwg-bbr">[I-D.draft-ietf-ccwg-bbr]</dt>
         <dd>
-<span class="refAuthor">Cardwell, N.</span>, <span class="refAuthor">Swett, I.</span>, and <span class="refAuthor">J. Beshay</span>, <span class="refTitle">"BBR Congestion Control"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ccwg-bbr-06</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ccwg-bbr-06">https://datatracker.ietf.org/doc/html/draft-ietf-ccwg-bbr-06</a>&gt;</span>. </dd>
+<span class="refAuthor">Cardwell, N.</span>, <span class="refAuthor">Swett, I.</span>, and <span class="refAuthor">J. Beshay</span>, <span class="refTitle">"BBR Congestion Control"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ccwg-bbr-07</span>, <time datetime="2026-11-02" class="refDate">2 November 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ccwg-bbr-07">https://datatracker.ietf.org/doc/html/draft-ietf-ccwg-bbr-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="LINUX-FQ-PIE">[LINUX-FQ-PIE]</dt>
         <dd>
