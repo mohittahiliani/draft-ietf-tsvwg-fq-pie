@@ -4,8 +4,8 @@
 
 Transport and Services Working Group                     M. P. Tahiliani
 Internet-Draft                National Institute of Technology Karnataka
-Intended status: Experimental                            4 November 2026
-Expires: 8 May 2027
+Intended status: Experimental                           16 November 2026
+Expires: 20 May 2027
 
 
  Flow Queue PIE: A Hybrid Packet Scheduler and Active Queue Management
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 May 2027.
+   This Internet-Draft will expire on 20 May 2027.
 
 Copyright Notice
 
@@ -134,14 +134,13 @@ Table of Contents
 4.  The FQ-PIE Algorithm
 
    The FQ-PIE algorithm consists of two main components: (i) flow
-   queuing, which isolates competing flows by treating flows that build
-   queues differently from those that do not, and (ii) the PIE AQM
-   algorithm, which manages each queue and maintains a target queue
-   delay (such as the 15 ms default in [RFC8033]).  Flow queuing works
-   by classifying incoming packets into different queues during the
-   enqueue phase and then scheduling outgoing packets from these queues
-   during the dequeue phase.  The PIE algorithm, however, only operates
-   during enqueue.
+   queuing, which isolates competing flows into separate queues, and
+   (ii) the PIE AQM algorithm, which manages each queue and maintains a
+   target queue delay (such as the 15 ms default in [RFC8033]).  Flow
+   queuing works by classifying incoming packets into different queues
+   during the enqueue phase and then scheduling outgoing packets from
+   these queues during the dequeue phase.  The PIE algorithm, however,
+   only operates during enqueue.
 
    The details of flow queuing and the PIE algorithm are not covered
    here; for more information, please refer to [RFC8290] and [RFC8033],
@@ -155,12 +154,13 @@ Table of Contents
    IP addresses, and source and destination port numbers, similar to the
    approach used in FQ-CoDel.
 
-   Next, the packet is passed to the PIE algorithm, which uses a drop
-   probability to determine whether the packet should be enqueued or
-   dropped, as outlined in [RFC8033].  This drop probability is updated
-   periodically (such as the 15 ms default in [RFC8033]) based on the
-   current queue delay's deviation from the target delay and whether the
-   delay is trending up or down.
+   Next, the packet is passed to the PIE algorithm, which is applied
+   independently to each queue and maintains a separate drop probability
+   for each queue.  This probability is used to determine whether the
+   packet should be enqueued or dropped, as outlined in [RFC8033].  The
+   drop probability for each queue is updated periodically (such as the
+   15 ms default in [RFC8033]) based on that queue's delay deviation
+   from the target delay and whether the delay is trending up or down.
 
    [RFC8033] presents two methods for calculating the current queue
    delay: one uses Little's Law, estimating delay based on the queue
@@ -180,14 +180,12 @@ Table of Contents
    per-packet queue delay, while the drop probability is calculated
    periodically.  Therefore, at each periodic probability update, FQ-PIE
    uses the queue delay value derived from the most recently dequeued
-   packet.
+   packet from the corresponding queue.
 
    At the time of writing this document, the Linux, FreeBSD and ns-3
-   implementations use timestamps to calculate the current queue delay
-   and consider the measurements from the most recently dequeued packet
-   when calculating the drop probability.  Additionally, these
-   implementations offer an option to use the dequeue rate estimation
-   technique based on Little's Law.
+   implementations use timestamps to calculate the current queue delay.
+   Additionally, these implementations offer an option to use the
+   dequeue rate estimation technique based on Little's Law.
 
    Lastly, if an incoming packet arrives when the total number of
    enqueued packets has already saturated the queue capacity, FQ-PIE
@@ -221,11 +219,14 @@ Table of Contents
 
 4.3.  ECN Support
 
-   FQ-PIE MAY support ECN by marking ECN-Capable Transport (ECT) packets
-   [RFC3168] instead of dropping them, in accordance with the
-   recommendations in Section 5.1 of [RFC8033].  The Linux, FreeBSD and
-   ns-3 implementations of FQ-PIE comply with these recommendations at
-   the time of writing this document.
+   FQ-PIE MAY support ECN by marking ECN-Capable Transport (0) packets
+   [RFC3168] [RFC8311] as Congestion Experienced (CE) instead of
+   dropping them, in accordance with the recommendations in Section 5.1
+   of [RFC8033].  The Linux, FreeBSD and ns-3 implementations of FQ-PIE
+   comply with these recommendations at the time of writing this
+   document.  Note that support for congestion marking of ECN-Capable
+   Transport (1) packets (i.e. L4S [RFC9331]), while available in the
+   ns-3 implementation of FQ-PIE, is not specified here.
 
 5.  Scope of Experimentation
 
@@ -310,6 +311,17 @@ Table of Contents
               and Active Queue Management Algorithm", RFC 8290,
               DOI 10.17487/RFC8290, January 2018,
               <https://www.rfc-editor.org/rfc/rfc8290>.
+
+   [RFC8311]  Black, D., "Relaxing Restrictions on Explicit Congestion
+              Notification (ECN) Experimentation", RFC 8311,
+              DOI 10.17487/RFC8311, January 2018,
+              <https://www.rfc-editor.org/rfc/rfc8311>.
+
+   [RFC9331]  De Schepper, K. and B. Briscoe, Ed., "The Explicit
+              Congestion Notification (ECN) Protocol for Low Latency,
+              Low Loss, and Scalable Throughput (L4S)", RFC 9331,
+              DOI 10.17487/RFC9331, January 2023,
+              <https://www.rfc-editor.org/rfc/rfc9331>.
 
 8.2.  Informative References
 
