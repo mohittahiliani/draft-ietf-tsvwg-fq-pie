@@ -99,7 +99,7 @@ This document uses the terms defined in Section 1.1 of {{!RFC8290}} and Sections
 
 # The FQ-PIE Algorithm
 
-The FQ-PIE algorithm consists of two main components: (i) flow queuing, which isolates competing flows by treating flows that build queues differently from those that do not, and (ii) the PIE AQM algorithm, which manages each queue and maintains a target queue delay (such as the 15 ms default in {{!RFC8033}}). Flow queuing works by classifying incoming packets into different queues during the enqueue phase and then scheduling outgoing packets from these queues during the dequeue phase. The PIE algorithm, however, only operates during enqueue.
+The FQ-PIE algorithm consists of two main components: (i) flow queuing, which isolates competing flows into separate queues, and (ii) the PIE AQM algorithm, which manages each queue and maintains a target queue delay (such as the 15 ms default in {{!RFC8033}}). Flow queuing works by classifying incoming packets into different queues during the enqueue phase and then scheduling outgoing packets from these queues during the dequeue phase. The PIE algorithm, however, only operates during enqueue.
 
 The details of flow queuing and the PIE algorithm are not covered here; for more information, please refer to {{!RFC8290}} and {{!RFC8033}}, respectively.
 
@@ -107,13 +107,13 @@ The details of flow queuing and the PIE algorithm are not covered here; for more
 
 The packet enqueue process is described as follows: first, the incoming packets are classified into different queues by hashing the 5-tuple, which includes the protocol number, source and destination IP addresses, and source and destination port numbers, similar to the approach used in FQ-CoDel.
 
-Next, the packet is passed to the PIE algorithm, which uses a drop probability to determine whether the packet should be enqueued or dropped, as outlined in {{!RFC8033}}. This drop probability is updated periodically (such as the 15 ms default in {{!RFC8033}}) based on the current queue delay's deviation from the target delay and whether the delay is trending up or down.
+Next, the packet is passed to the PIE algorithm, which is applied independently to each queue and maintains a separate drop probability for each queue. This probability is used to determine whether the packet should be enqueued or dropped, as outlined in {{!RFC8033}}. The drop probability for each queue is updated periodically (such as the 15 ms default in {{!RFC8033}}) based on that queue's delay deviation from the target delay and whether the delay is trending up or down.
 
 {{!RFC8033}} presents two methods for calculating the current queue delay: one uses Little's Law, estimating delay based on the queue length and the average dequeue rate; the other takes direct measurements using timestamps, as implemented in CoDel and FQ-CoDel. However, experimental studies on the PIE algorithm [REVISIT-PIE] indicate that while the dequeue rate is intended to estimate the transmission rate of packets over the outgoing link, it may instead reflect the rate at which packets move from the host stack (e.g., Linux qdisc) to the device driver's transmission ring. Additionally, in FQ-PIE, queue delay estimates from Little's Law can be unreliable, as it's challenging to calculate an accurate per-queue dequeue rate. Consequently, the FQ-PIE algorithm SHOULD calculate the current queue delay using direct measurements with timestamps.
 
-It is important to note that the timestamping approach provides a per-packet queue delay, while the drop probability is calculated periodically. Therefore, at each periodic probability update, FQ-PIE uses the queue delay value derived from the most recently dequeued packet.
+It is important to note that the timestamping approach provides a per-packet queue delay, while the drop probability is calculated periodically. Therefore, at each periodic probability update, FQ-PIE uses the queue delay value derived from the most recently dequeued packet from the corresponding queue.
 
-At the time of writing this document, the Linux, FreeBSD and ns-3 implementations use timestamps to calculate the current queue delay and consider the measurements from the most recently dequeued packet when calculating the drop probability. Additionally, these implementations offer an option to use the dequeue rate estimation technique based on Little's Law.
+At the time of writing this document, the Linux, FreeBSD and ns-3 implementations use timestamps to calculate the current queue delay. Additionally, these implementations offer an option to use the dequeue rate estimation technique based on Little's Law.
 
 Lastly, if an incoming packet arrives when the total number of enqueued packets has already saturated the queue capacity, FQ-PIE drops the packet without further processing. In contrast, FQ-CoDel identifies the queue with the largest current byte count (i.e., a "fat flow") when the queue capacity is saturated and drops half of the packets from this queue (up to a maximum of 64 packets, as specified in Section 4.1 of {{!RFC8290}}). FQ-PIE does not adopt this approach for the reasons explained below:
 
@@ -125,7 +125,7 @@ The packet dequeue process in FQ-PIE is similar to that in FQ-CoDel, where a DRR
 
 ## ECN Support
 
-FQ-PIE MAY support ECN by marking ECN-Capable Transport (ECT) packets {{!RFC3168}} instead of dropping them, in accordance with the recommendations in Section 5.1 of {{!RFC8033}}. The Linux, FreeBSD and ns-3 implementations of FQ-PIE comply with these recommendations at the time of writing this document.
+FQ-PIE MAY support ECN by marking ECN-Capable Transport (0) packets {{!RFC3168}} {{!RFC8311}} as Congestion Experienced (CE) instead of dropping them, in accordance with the recommendations in Section 5.1 of {{!RFC8033}}. The Linux, FreeBSD and ns-3 implementations of FQ-PIE comply with these recommendations at the time of writing this document. Note that support for congestion marking of ECN-Capable Transport (1) packets (i.e. L4S {{!RFC9331}}), while available in the ns-3 implementation of FQ-PIE, is not specified here.
 
 # Scope of Experimentation
 
