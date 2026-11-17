@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-05T04:29:16.303301+00:00",
+  "timestamp": "2026-11-17T05:53:21.793647+00:00",
   "repo": "mohittahiliani/draft-ietf-tsvwg-fq-pie",
   "labels": [
     {
@@ -135,6 +135,30 @@
           "body": "Fixed in 8f0a57d",
           "createdAt": "2026-10-31T10:39:03Z",
           "updatedAt": "2026-10-31T10:39:03Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDONL7jHs8AAAABf3DhCQ",
+      "title": "Greg's suggestions",
+      "url": "https://github.com/mohittahiliani/draft-ietf-tsvwg-fq-pie/issues/6",
+      "state": "CLOSED",
+      "author": "mohittahiliani",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "======\nSection 4, first sentence reads:  \"The FQ-PIE algorithm consists of two main components: (i) flow queuing, which isolates competing flows by treating flows that build queues differently from those that do not, and (ii) the PIE AQM algorithm, which manages each queue and maintains a target queue delay (such as the 15 ms default in [RFC8033]).\u201d \n\nThe description of the first (i) component reads strangely to me.   I\u2019m not sure what it means for a flow to \u201cbuild queues differently\u201d nor am I sure what it means for a flow to \u201cnot [build queues differently]\u201d.  But, moreover I don\u2019t see anything in the classification algorithm that actually differentiates flows based on how they build queues.  Could the sentence be replaced by something like:\n \n\"The FQ-PIE algorithm consists of two main components: (i) flow queuing, which isolates competing flows into separate queues, and (ii) the PIE AQM algorithm, which manages each queue and maintains a target queue delay (such as the 15 ms default in [RFC8033]).\u201d\n\n======\nSection 4.1, 3rd and 4th paragraphs.  Para 3 starts with a description of single queue PIE and ends with a recommendation for FQ-PIE, but it doesn\u2019t seem to ever mention per-queue operations.  I think it would be good to explicitly state that each active queue has its own drop probability, calculated via the per-queue delay estimate for that queue. Para 4 discusses the periodic probability update, are these done across all active queues simultaneously (does it matter)?\n\n======\nSection 4.1, 5th paragraph reads:\n\"At the time of writing this document, the Linux, FreeBSD and ns-3 implementations use timestamps to calculate the current queue delay and consider the measurements from the most recently dequeued packet when calculating the drop probability.\" \n\nThis sentence is worded differently, but seems to completely repeat the description in the immediately preceding paragraph.  I had to read it a couple of times to confirm that it wasn\u2019t saying something subtly different.  I suggest deleting the unneeded duplicate explanation, leaving it as: \u201cAt the time of writing this document, the Linux, FreeBSD and ns-3 implementations use timestamps to calculate the current queue delay.\u201d\n\n======\nSection 4.1, 6th paragraph ends with a colon.  Should be a period. \n\n======\nSection 4.3, first sentence reads: \"FQ-PIE MAY support ECN by marking ECN-Capable Transport (ECT) packets [RFC3168] instead of dropping them, in accordance with the recommendations in Section 5.1 of [RFC8033]. \"\n\nAt this point I don\u2019t think tsvwg can ignore the existence of L4S.  My preference would be for the draft to include a recommendation to support a ce_threshold marking for ECT1 packets, similar to what is implemented in linux fq_codel.  At a minimum, the draft should indicate that \u201cECN\u201d here refers specifically to non-L4S (aka Classic ECN).",
+      "createdAt": "2026-11-16T23:25:01Z",
+      "updatedAt": "2026-11-16T23:38:16Z",
+      "closedAt": "2026-11-16T23:38:16Z",
+      "comments": [
+        {
+          "author": "mohittahiliani",
+          "authorAssociation": "OWNER",
+          "body": "Fixed in https://github.com/mohittahiliani/draft-ietf-tsvwg-fq-pie/commit/d767ffc5a8e864589d86fd9a2b85f0625b195646",
+          "createdAt": "2026-11-16T23:38:16Z",
+          "updatedAt": "2026-11-16T23:38:16Z"
         }
       ]
     }
