@@ -4,8 +4,8 @@
 
 Transport and Services Working Group                     M. P. Tahiliani
 Internet-Draft                National Institute of Technology Karnataka
-Intended status: Experimental                           16 November 2026
-Expires: 20 May 2027
+Intended status: Experimental                           20 November 2026
+Expires: 24 May 2027
 
 
  Flow Queue PIE: A Hybrid Packet Scheduler and Active Queue Management
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 May 2027.
+   This Internet-Draft will expire on 24 May 2027.
 
 Copyright Notice
 
@@ -194,18 +194,17 @@ Table of Contents
    "fat flow") when the queue capacity is saturated and drops half of
    the packets from this queue (up to a maximum of 64 packets, as
    specified in Section 4.1 of [RFC8290]).  FQ-PIE does not adopt this
-   approach for the reasons explained below:
-
-   Since CoDel performs its queue control operations during the dequeue
-   phase and does not drop incoming packets until the queue is full, it
-   tends to fill its queues more quickly than PIE, which drops packets
-   randomly during the enqueue phase.  This is especially true when
-   CoDel has just entered the dropping phase, as it takes time to ramp
-   up its packet dropping frequency.  Therefore, the strategy of
-   dropping half of the packets from a fat flow's queue suits FQ-CoDel
-   but is not appropriate for FQ-PIE.  Dropping packets in bulk might
-   lead to underutilization of link capacity, as FQ-PIE already enforces
-   queue control during the enqueue phase.
+   approach.  Unlike PIE, CoDel performs its queue control operations
+   during the dequeue phase and does not drop incoming packets until the
+   queue is full.  Consequently, CoDel tends to fill its queues more
+   quickly than PIE, which drops packets randomly during the enqueue
+   phase.  This is especially true when CoDel has just entered the
+   dropping phase, as it takes time to ramp up its packet dropping
+   frequency.  Therefore, the strategy of dropping half of the packets
+   from a fat flow's queue suits FQ-CoDel but is not appropriate for FQ-
+   PIE.  Dropping packets in bulk might lead to underutilization of link
+   capacity, as FQ-PIE already enforces queue control during the enqueue
+   phase.
 
 4.2.  Dequeue
 
