@@ -32,7 +32,7 @@ author:
     city: Mangalore, Karnataka - 575025
     country: India
     email: tahiliani@nitk.edu.in
-    uri: http://tahiliani.in
+    uri: https://tahiliani.in
 
 normative:
 informative:
