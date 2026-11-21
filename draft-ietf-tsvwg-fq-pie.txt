@@ -4,8 +4,8 @@
 
 Transport and Services Working Group                     M. P. Tahiliani
 Internet-Draft                National Institute of Technology Karnataka
-Intended status: Experimental                           20 November 2026
-Expires: 24 May 2027
+Intended status: Experimental                           21 November 2026
+Expires: 25 May 2027
 
 
  Flow Queue PIE: A Hybrid Packet Scheduler and Active Queue Management
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 May 2027.
+   This Internet-Draft will expire on 25 May 2027.
 
 Copyright Notice
 
@@ -364,11 +364,14 @@ Acknowledgments
 
    The author would like to thank Michael Welzl, Sebastian Moeller,
    Chris Box, and Greg White for suggesting improvements to this
-   document.  The author also thanks the developers and contributors of
-   the FQ-PIE implementations in Linux, FreeBSD, and ns-3.  Vishal
-   Kamath and Arun Kumar R contributed to the FQ-PIE experiments.
-   Rasool Al-Saadi and Grenville Armitage developed the FreeBSD FQ-PIE
-   implementation.
+   document.  Rasool Al-Saadi and Grenville Armitage developed the
+   FreeBSD FQ-PIE implementation.  The Linux FQ-PIE implementation was
+   developed by Gautam Ramakrishnan, Leslie Monis, Mohit Bhasi, V.
+   Saicharan, Sachin D.  Patil, and the author.  The ns-3 FQ-PIE
+   implementation was developed by Sumukha PK, Prajval M, Ishaan R D,
+   and the author.  Vishal Kamath, Arun Kumar R, and several other
+   students from NITK Surathkal, together with the author, contributed
+   to the FQ-PIE experiments.
 
 Author's Address
 
